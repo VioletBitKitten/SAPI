@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Buld SAPI",
+            "type": "shell",
+            "command": ".\\build.bat",
+            "group": "build"
+        },
+        {
+            "label": "Clean SAPI",
+            "type": "shell",
+            "command": ".\\build.bat clean",
+            "group": "build"
+        },
+        {
+            "label": "Test SAPI",
+            "type": "shell",
+            "command": ".\\build.bat test",
+            "group": "test"
+        }
+    ]
+}

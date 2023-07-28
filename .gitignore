@@ -1,0 +1,10 @@
+*.swp
+Makefile
+fpcmade.*
+units
+sapi.o
+sapi.ppu
+tts.exe
+tts.o
+ttsdemo.exe
+ttsdemo.o
