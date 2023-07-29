@@ -329,7 +329,6 @@ begin
   { Try a partial name match. }
   if OutputID < 0 then
   begin
-    Outputs.Sort; { Sort the list to match uesers expectations. }
     for OutputIndex := 0 to Outputs.Count - 1 do
       if Outputs[OutputIndex].StartsWith(OutputName) then
         OutputID := OutputIndex;
@@ -368,7 +367,7 @@ begin
   { Try a partial name match. }
   if VoiceID < 0 then
   begin
-    Voices.Sort; { Sort the list to match uesers expectations. }
+
     for VoiceIndex := 0 to Voices.Count - 1 do
       if Voices[VoiceIndex].StartsWith(VoiceName) then
         VoiceID := VoiceIndex;
