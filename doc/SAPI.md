@@ -6,10 +6,6 @@ Free Pascal interface to Microsoft [SAPI](https://learn.microsoft.com/en-us/prev
 
 This library implements the [SpVoice}(https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ee125640(v=vs.85)) and [SpFileStream](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ee125548(v=vs.85)) interfaces. The primary purpose of this library is to provide a simple interface for TTS.
 
-## TODO
-
-* Implement an interface for making use of the Status property.
-
 ## References
 
 * Microsoft SAPI Documentation on the SpVoice interface.\
