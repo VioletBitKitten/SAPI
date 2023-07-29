@@ -37,7 +37,6 @@ Contents of this package:
 
 * Create Unit tests.
 * Implement an interface for making use of the Status property.
-* Partial string matching on Voice and Audio Output Device. The names can be long and complicated.
 * Expand the tts program to be more useful as a VTuber.
   Perhaps move this to a new project?
 
