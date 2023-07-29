@@ -417,12 +417,16 @@ var
 begin
   WriteLn('Text entered will be spoken.');
   WriteLn('Enter a blank line to exit.');
+  if WriteText then
+    Writeln('Enter "\" to speak an empty string and write a blank line.');
   while True do
   begin
     Write('> ');
     ReadLn(Text);
     if Length(Text) = 0 then
       Break;
+    if Text = '\' then
+      Text := '';
     SpeakText(Text);
   end;
 end;
