@@ -208,7 +208,7 @@ SpVoice.SetAudioOutputID(OutputID)
 
 #### TSpVoice.SetAudioOutputName
 
-Set the Output to be used when speaking text by the Output name. Intended for user interface. Internally calls [TSpVoice.GetAudioOutputs](#tspvoicegetaudiooutputs) and [TSpVoice.SetAudioOutputID](#tspvoicesetaudiooutputid). See also the message `SpVoice_invalid_audio_output_name`.
+Set the Output to be used when speaking text by the Output name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. Internally calls [TSpVoice.GetAudioOutputs](#tspvoicegetaudiooutputs) and [TSpVoice.SetAudioOutputID](#tspvoicesetaudiooutputid). See also the message `SpVoice_invalid_audio_output_name`.
 
 **Definition:**
 
@@ -240,7 +240,7 @@ SpVoice.SetVoiceID(VoiceID)
 
 #### TSpVoice.SetVoiceName
 
-Set the Voice to be used when speaking text by the Voice name. Intended for user interface. Internally calls [TSpVoice.GetVoices](#tspvoicegetvoices) and [TSpVoice.SetVoiceID](#tspvoicesetvoiceid). See also the message `SpVoice_invalid_voice_name`.
+Set the Voice to be used when speaking text by the Voice name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. Internally calls [TSpVoice.GetVoices](#tspvoicegetvoices) and [TSpVoice.SetVoiceID](#tspvoicesetvoiceid). See also the message `SpVoice_invalid_voice_name`.
 
 **Definition:**
 

@@ -316,11 +316,25 @@ end;
 { Set the Output to be used when speaking text by the Output name. }
 procedure TSpVoice.SetAudioOutputName(OutputName : String);
 var
-  Outputs : TstringList;
-  OutputID : Integer;
+  Outputs     : TstringList;
+  OutputID    : Integer;
+  OutputIndex : Integer;
 begin
+  { Get the available outputs. }
   Outputs := GetAudioOutputNames;
+
+  { Try an exact name match. }
   OutputID := Outputs.IndexOf(OutputName);
+
+  { Try a partial name match. }
+  if OutputID < 0 then
+  begin
+    Outputs.Sort; { Sort the list to match uesers expectations. }
+    for OutputIndex := 0 to Outputs.Count - 1 do
+      if Outputs[OutputIndex].StartsWith(OutputName) then
+        OutputID := OutputIndex;
+  end;
+
     if (ExceptionsEnabled and (OutputID < 0)) then
     raise EArgumentException.Create(SpVoice_invalid_audio_output_name);
   if OutputID >= 0 then
@@ -341,11 +355,25 @@ end;
 { Set the voice to be used when speaking text by the Voice name. }
 procedure TSpVoice.SetVoiceName(VoiceName : String);
 var
-  Voices : TstringList;
-  VoiceID : Integer;
+  Voices     : TstringList;
+  VoiceID    : Integer;
+  VoiceIndex : Integer;
 begin
+  { Get the available voices. }
   Voices := GetVoiceNames;
+
+  { Try an exact name match. }
   VoiceID := Voices.IndexOf(VoiceName);
+
+  { Try a partial name match. }
+  if VoiceID < 0 then
+  begin
+    Voices.Sort; { Sort the list to match uesers expectations. }
+    for VoiceIndex := 0 to Voices.Count - 1 do
+      if Voices[VoiceIndex].StartsWith(VoiceName) then
+        VoiceID := VoiceIndex;
+  end;
+
   if (ExceptionsEnabled and (VoiceID < 0)) then
     raise EArgumentException.Create(SpVoice_invalid_voice_name);
   if VoiceID >= 0 then
