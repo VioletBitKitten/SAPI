@@ -12,9 +12,9 @@ This software was written to make it easier to use Text To Speech as a VTuber. T
 
 ## Building
 
-To build this project use the script `build.bat` or `build.sh`.
+To build this project use the script `build.bat`.
 
-For help in the build scripts run the command `build.bat help` or `./build.sh help`.
+For help in the build scripts run the command `build.bat help`.
 
 To Manually build this project:
 

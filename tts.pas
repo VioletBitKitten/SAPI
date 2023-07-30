@@ -93,7 +93,7 @@ WriteLn(Title);
   WriteLn('  -l , --volume=VOLUME      Set the volume text is spoken at. ', SpVoice_volume_valid_values);
   WriteLn('  -o , --outut=OUTPUT       Set the putput text is spoken to by the name or ID number.');
   WriteLn('  -O , --outputs            List the available audio output devices with ID #.');
-  WriteLn('  -p , --priority           Set the priority for speaking. ', SpVoice_priority_valid_values);
+  WriteLn('  -p , --priority=PRIORITY  Set the priority for speaking. ', SpVoice_priority_valid_values);
   WriteLn('  -r , --rate=RATE          Set the rate text is spoken. ', SpVoice_rate_valid_values);
   WriteLn('  -v , --voice=VOICE        Set the voice text is spoken with by the name or ID number.');
   WriteLn('  -V , --voices             List the available voices with ID #.');
