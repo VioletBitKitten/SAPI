@@ -56,7 +56,7 @@ REM Run the tests.
         ECHO.
     )
     ECHO Running SAPI Unit tests...
-    rununit
+    runtests
 GOTO exitscript
 
 REM Exit the script.

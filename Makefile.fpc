@@ -3,5 +3,5 @@ name=SAPI
 version=0.00
 
 [target]
-units=sapi
-programs=ttsdemo tts
+units=sapi testsapi
+programs=ttsdemo tts runtests

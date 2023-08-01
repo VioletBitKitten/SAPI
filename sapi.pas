@@ -4,6 +4,8 @@
 
   See the file doc/SAPI.md for documentation on this library.
 
+  https://github.com/VioletBitKitten/SAPI
+
   Documentation on SAPI SpVoice:
   https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ee125640(v=vs.85)
 
