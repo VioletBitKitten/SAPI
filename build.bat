@@ -33,8 +33,6 @@ REM Cleanup build artifacts, including the Makefile.
     fpcmake
     make distclean
     DEL Makefile
-    REM Because Freepascal Make on Windows is a broken mess...
-    DEL runtests.exe tts.exe ttsdemo.exe
 GOTO exitscript
 
 REM Show some help text.
