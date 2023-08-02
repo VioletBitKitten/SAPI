@@ -35,10 +35,8 @@ Contents of this package:
 
 ## TODO
 
-* Create Unit tests.
+* Create Unit tests. - In Progress.
 * Implement an interface for making use of the Status property.
-* Expand the tts program to be more useful as a VTuber.
-  Perhaps move this to a new project?
 
 ## References
 
