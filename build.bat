@@ -8,14 +8,16 @@ REM If none just run the build.
 IF -%1-==-- GOTO runbuild
 
 REM Figure out what we were given on the command line.
-SET command=%1
-if /i "%command%"=="build" GOTO runbuild
-if /i "%command%"=="clean" GOTO runclean
-if /i "%command%"=="test"  GOTO runtests
-if /i "%command%"=="tests" GOTO runtests
-if /i "%command%"=="help"  GOTO showhelp
-if /i "%command%"=="/?"    GOTO showhelp
-if /i "%command%"=="-h"    GOTO showhelp
+:processargs
+    if /i "%1"=="build" CALL :runbuild
+    if /i "%1"=="clean" CALL :runclean
+    if /i "%1"=="test"  CALL :runtests
+    if /i "%1"=="tests" CALL :runtests
+    if /i "%1"=="help"  CALL :showhelp
+    if /i "%1"=="/?"    CALL :showhelp
+    if /i "%1"=="-h"    CALL :showhelp
+    shift
+    if not -%1-==-- goto processargs
 GOTO exitscript
 
 REM Run the actual build.
@@ -25,15 +27,18 @@ REM Run the actual build.
         fpcmake
     )
     make
-GOTO exitscript
+    EXIT /b
 
 REM Cleanup build artifacts, including the Makefile.
 :runclean
-    ECHO Cleaning SAPI...
-    fpcmake
-    make distclean
-    DEL Makefile
-GOTO exitscript
+    IF EXIST "Makefile" (
+        ECHO Cleaning SAPI...
+        make distclean
+        DEL Makefile
+    ) else (
+        ECHO Nothing to clean.
+    )
+    EXIT /b
 
 REM Show some help text.
 :showhelp
@@ -45,19 +50,16 @@ REM Show some help text.
     ECHO clean - Runs the make command 'distclean'.
     ECHO help  - Display this help text.
     ECHO test  - Runs the SAPI tests.
-GOTO exitscript
+    GOTO exitscript
 
 REM Run the tests.
 :runtests
     IF NOT EXIST "rununit.exe" (
-        echo First building SAPI...
-        fpcmake
-        make
-        ECHO.
+        CALL :runbuild
     )
     ECHO Running SAPI Unit tests...
     runtests
-GOTO exitscript
+    EXIT /b
 
 REM Exit the script.
 :exitscript
