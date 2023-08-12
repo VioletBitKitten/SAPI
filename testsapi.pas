@@ -39,6 +39,10 @@ type
     procedure TestSAPIGetAudioOutputsNames;
     procedure TestSAPIGetVoices;
     procedure TestSAPIGetVoiceNames;
+    procedure TestSAPISetAudioOutputID;
+    procedure TestSAPISetAudioOutputName;
+    procedure TestSAPISetVoiceID;
+    procedure TestSAPISetVoiceName;
     { Test TSpVoice Properties }
     procedure TestSAPIAudioOutput;
     procedure TestSAPIAudioOutputStream;
@@ -166,6 +170,58 @@ begin
   AssertTrue('There should be at least one available Voice.', (VoiceNames.Count >= 1));
 end;
 
+procedure TSAPITest.TestSAPISetAudioOutputID;
+var
+  NewSpVoice : TSpVoice;
+  OutputNames : TstringList;
+  NewOutput   : Variant;
+begin
+  NewSpVoice := TSpVoice.Create;
+  OutputNames := SpVoice.GetAudioOutputNames;
+  NewSpVoice.SetAudioOutputID(1);
+  NewOutput := NewSpVoice.AudioOutput;
+  AssertEquals('The new Audio Output should match the voice output.', OutputNames[1], NewOutput.GetDescription);
+end;
+
+procedure TSAPITest.TestSAPISetAudioOutputName;
+var
+  NewSpVoice : TSpVoice;
+  OutputNames : TstringList;
+  NewOutput   : Variant;
+begin
+  NewSpVoice := TSpVoice.Create;
+  OutputNames := SpVoice.GetAudioOutputNames;
+  NewSpVoice.SetAudioOutputName(OutputNames[1]);
+  NewOutput := NewSpVoice.AudioOutput;
+  AssertEquals('The new Audio Output match the voice output.', OutputNames[1], NewOutput.GetDescription);
+end;
+
+procedure TSAPITest.TestSAPISetVoiceID;
+var
+  NewSpVoice : TSpVoice;
+  VoiceNames : TstringList;
+  NewVoice   : Variant;
+begin
+  NewSpVoice := TSpVoice.Create;
+  VoiceNames := SpVoice.GetVoiceNames;
+  NewSpVoice.SetVoiceID(1);
+  NewVoice := NewSpVoice.Voice;
+  AssertEquals('The new voice should match the voice set.', VoiceNames[1], NewVoice.GetDescription);
+end;
+
+procedure TSAPITest.TestSAPISetVoiceName;
+var
+  NewSpVoice : TSpVoice;
+  VoiceNames : TstringList;
+  NewVoice   : Variant;
+begin
+  NewSpVoice := TSpVoice.Create;
+  VoiceNames := SpVoice.GetVoiceNames;
+  NewSpVoice.SetVoiceName(VoiceNames[1]);
+  NewVoice := NewSpVoice.Voice;
+  AssertEquals('The new voice should match the voice set.', VoiceNames[1], NewVoice.GetDescription);
+end;
+
 { ----------========== Test TSpVoice Properties ==========---------- }
 
 procedure TSAPITest.TestSAPIAudioOutput;
@@ -174,7 +230,8 @@ var
 begin
   Output := SpVoice.AudioOutput;
   // TODO: Better test for this.
-  AssertTrue('Audio Output Device should have a description.', (length(Output.GetDescription) >= 0));
+  AssertFalse('Audio Output Device should be defined.', VarIsNull(Output));
+
 end;
 
 procedure TSAPITest.TestSAPIAudioOutputStream;
@@ -272,7 +329,7 @@ begin
   { The Status.CurrentStreamNumber should be different now. }
   Status := NewSpVoice.Status;
   AssertEquals('The SpVoice Status CurrentStreamNumber should be one after speaking.', 1, Status.CurrentStreamNumber);
-  AssertEquals('The SpVoice Status LastStreamNumberQueued should be one before speaking.', 1, Status.LastStreamNumberQueued);
+  AssertEquals('The SpVoice Status LastStreamNumberQueued should be one after speaking.', 1, Status.LastStreamNumberQueued);
 end;
 
 procedure TSAPITest.TestSAPISynchronousSpeakTimeout;
