@@ -152,12 +152,6 @@ begin
   end;
 
   { List the available Audio Outputs. }
-  if HasOption('D', 'diag') then
-  begin
-    PrintDiagData;
-  end;
-
-  { List the available Audio Outputs. }
   if HasOption('O', 'outputs') then
   begin
     ListOutputs;
@@ -174,6 +168,12 @@ begin
   end;
 
   { Set various settings. }
+
+  { Write out diagnostic data. }
+  if HasOption('D', 'diag') then
+  begin
+    PrintDiagData;
+  end;
 
   { Set the volume text is spoken at. }
   if HasOption('l', 'volume') then
@@ -285,7 +285,7 @@ begin
     WriteLn(VoiceIndex, ' - ', Voices[VoiceIndex]);
 end;
 
-{ Set the Audio Output Device }
+{ Write out diagnostic data. }
 procedure TTTSApp.PrintDiagData;
 var
   Output : Variant;
