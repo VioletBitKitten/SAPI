@@ -26,6 +26,7 @@ type
     ShortOptions : String;
     WriteText    : Boolean;
     WriteWav     : Boolean;
+    Diagnostic   : Boolean;
   public
     { Application Setup }
     destructor Destroy; override;
@@ -38,6 +39,7 @@ type
     { Helper Methods }
     procedure ListVoices;
     procedure ListOutputs;
+    procedure PrintDiagData;
     procedure SetAudioOutput(NewOutput : String);
     procedure SetPriority(NewPriority : String);
     procedure SetRate(NewRate : String);
@@ -72,6 +74,8 @@ begin
   ProcessOptions;
   if not Terminated then
   begin
+    if Diagnostic then
+      PrintDiagData;
     ReadSpeakLoop;
     Terminate;
   end;
@@ -88,6 +92,7 @@ WriteLn(Title);
   WriteLn;
   WriteLn('Options:');
   WriteLn('  -a , --append             Append text when writing text to a file.');
+  WriteLn('  -D , --diag               Print out diagnostic information.');
   WriteLn('  -f , --speak-file         Speak the contents of a text file.');
   WriteLn('  -h , --help               Prints this help.');
   WriteLn('  -l , --volume=VOLUME      Set the volume text is spoken at. ', SpVoice_volume_valid_values);
@@ -111,6 +116,7 @@ begin
   SpVoice.ExceptionsEnabled := True;
   WriteText := False;
   WriteWav := False;
+  Diagnostic := False;
 end;
 
 { ----------========== Command Line Options ==========----- }
@@ -143,6 +149,12 @@ begin
     Help;
     Terminate;
     Exit;
+  end;
+
+  { List the available Audio Outputs. }
+  if HasOption('D', 'diag') then
+  begin
+    PrintDiagData;
   end;
 
   { List the available Audio Outputs. }
@@ -230,10 +242,11 @@ end;
 { Setup the command line options. }
 procedure TTTSApp.SetupOptions;
 begin
-  ShortOptions := 'af:hl:Oo:p:r:Vv:w:W:';
+  ShortOptions := 'aDf:hl:Oo:p:r:Vv:w:W:';
   LongOptions := TStringList.Create;
   LongOptions.Add('help');
   LongOptions.Add('append');
+  LongOptions.Add('diag');
   LongOptions.Add('output:');
   LongOptions.Add('outputs');
   LongOptions.Add('priority:');
@@ -270,6 +283,18 @@ begin
   WriteLn('Available voices:');
   for VoiceIndex := 0 to Voices.Count - 1 do
     WriteLn(VoiceIndex, ' - ', Voices[VoiceIndex]);
+end;
+
+{ Set the Audio Output Device }
+procedure TTTSApp.PrintDiagData;
+var
+  Output : Variant;
+  Voice  : Variant;
+begin
+  Output := SpVoice.AudioOutput;
+  Voice := SpVoice.Voice;
+  WriteLn('Output device: ', Output.GetDescription);
+  WriteLn('Voice: ', Voice.GetDescription);
 end;
 
 { Set the Audio Output Device }
