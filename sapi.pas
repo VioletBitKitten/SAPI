@@ -19,6 +19,7 @@
 
 { Modern Pascal Directives }
 {$mode objfpc}{$H+}{$J-}
+{$warn 6058 off} // Stop the annoying "marked as inline is not inlined" errors.
 
 unit sapi;
 
@@ -124,7 +125,7 @@ implementation
 { Get the current output device text is spoken to. }
 function TSpVoice.GetAudioOutput : Variant;
 begin
-  Result := SpVoice.AudioOutput ;
+  Result := SpVoice.AudioOutput;
 end;
 
 { Set the output text device is spoken to. }
@@ -136,7 +137,7 @@ end;
 { Get the current output stream text is spoken to. }
 function TSpVoice.GetAudioOutputStream : Variant;
 begin
-  Result := SpVoice.AudioOutputStream ;
+  Result := SpVoice.AudioOutputStream;
 end;
 
 { Set the output text stream is spoken to. }
@@ -154,7 +155,7 @@ end;
 { Get the current priority text is spoken at. }
 function TSpVoice.GetPriority : Integer;
 begin
-  Result := SpVoice.Priority ;
+  Result := SpVoice.Priority;
 end;
 
 { Set the priority text is spoken at. Valid values 0 to 2. }
