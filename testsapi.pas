@@ -10,6 +10,7 @@
 
 { Modern Pascal Directives }
 {$mode objfpc}{$H+}{$J-}
+{$warn 6058 off} // Stop the annoying "marked as inline is not inlined" errors.
 
 unit testsapi;
 
@@ -63,57 +64,39 @@ implementation
 { ----------========== Generate Exceptions ==========---------- }
 
 procedure TSAPITest.RaisePriorityExceptionHigh;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Priority := 3;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Priority := 3;
 end;
 
 procedure TSAPITest.RaisePriorityExceptionLow;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Priority := -1;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Priority := -1;
 end;
 
 procedure TSAPITest.RaiseRateExceptionHigh;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Rate := 11;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Rate := 11;
 end;
 
 procedure TSAPITest.RaiseRateExceptionLow;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Rate := -11;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Rate := -11;
 end;
 
 procedure TSAPITest.RaiseVolumeExceptionHigh;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Volume := 101;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Volume := 101;
 end;
 
 procedure TSAPITest.RaiseVolumeExceptionLow;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  NewSpVoice.ExceptionsEnabled := True;
-  NewSpVoice.Volume := -1;
+  SpVoice.ExceptionsEnabled := True;
+  SpVoice.Volume := -1;
 end;
 
 { ----------========== Protected Methods ==========---------- }
@@ -131,11 +114,9 @@ end;
 { ----------========== Test TSpVoice Methods ==========---------- }
 
 procedure TSAPITest.TestSAPICreate;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  AssertEquals('Exceptions should be disabled by default.', False, NewSpVoice.ExceptionsEnabled);
+  SpVoice := TSpVoice.Create;
+  AssertEquals('Exceptions should be disabled by default.', False, SpVoice.ExceptionsEnabled);
 end;
 
 procedure TSAPITest.TestSAPIGetAudioOutputs;
@@ -172,53 +153,45 @@ end;
 
 procedure TSAPITest.TestSAPISetAudioOutputID;
 var
-  NewSpVoice : TSpVoice;
   OutputNames : TstringList;
   NewOutput   : Variant;
 begin
-  NewSpVoice := TSpVoice.Create;
   OutputNames := SpVoice.GetAudioOutputNames;
-  NewSpVoice.SetAudioOutputID(1);
-  NewOutput := NewSpVoice.AudioOutput;
+  SpVoice.SetAudioOutputID(1);
+  NewOutput := SpVoice.AudioOutput;
   AssertEquals('The new Audio Output should match the voice output.', OutputNames[1], NewOutput.GetDescription);
 end;
 
 procedure TSAPITest.TestSAPISetAudioOutputName;
 var
-  NewSpVoice : TSpVoice;
   OutputNames : TstringList;
   NewOutput   : Variant;
 begin
-  NewSpVoice := TSpVoice.Create;
   OutputNames := SpVoice.GetAudioOutputNames;
-  NewSpVoice.SetAudioOutputName(OutputNames[1]);
-  NewOutput := NewSpVoice.AudioOutput;
+  SpVoice.SetAudioOutputName(OutputNames[1]);
+  NewOutput := SpVoice.AudioOutput;
   AssertEquals('The new Audio Output match the voice output.', OutputNames[1], NewOutput.GetDescription);
 end;
 
 procedure TSAPITest.TestSAPISetVoiceID;
 var
-  NewSpVoice : TSpVoice;
   VoiceNames : TstringList;
   NewVoice   : Variant;
 begin
-  NewSpVoice := TSpVoice.Create;
   VoiceNames := SpVoice.GetVoiceNames;
-  NewSpVoice.SetVoiceID(1);
-  NewVoice := NewSpVoice.Voice;
+  SpVoice.SetVoiceID(1);
+  NewVoice := SpVoice.Voice;
   AssertEquals('The new voice should match the voice set.', VoiceNames[1], NewVoice.GetDescription);
 end;
 
 procedure TSAPITest.TestSAPISetVoiceName;
 var
-  NewSpVoice : TSpVoice;
   VoiceNames : TstringList;
   NewVoice   : Variant;
 begin
-  NewSpVoice := TSpVoice.Create;
   VoiceNames := SpVoice.GetVoiceNames;
-  NewSpVoice.SetVoiceName(VoiceNames[1]);
-  NewVoice := NewSpVoice.Voice;
+  SpVoice.SetVoiceName(VoiceNames[1]);
+  NewVoice := SpVoice.Voice;
   AssertEquals('The new voice should match the voice set.', VoiceNames[1], NewVoice.GetDescription);
 end;
 
@@ -244,19 +217,16 @@ begin
 end;
 
 procedure TSAPITest.TestSAPIPriority;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  AssertEquals('The SpVoice Priority should be zero by default.', 0, NewSpVoice.Priority);
-  NewSpVoice.Priority := 1;
-  AssertEquals('The SpVoice Priority should be one after being set to 1.', 1, NewSpVoice.Priority);
+  AssertEquals('The SpVoice Priority should be zero by default.', 0, SpVoice.Priority);
+  SpVoice.Priority := 1;
+  AssertEquals('The SpVoice Priority should be one after being set to 1.', 1, SpVoice.Priority);
 
   { With Exceptions disabled setting Priority out of bounds should not generate an Exception. }
-  NewSpVoice.Priority := 3;
-  AssertEquals('The SpVoice Priority should be two after being set to 3.', 2, NewSpVoice.Priority);
-  NewSpVoice.Priority := -1;
-  AssertEquals('The SpVoice Priority should be zero after being set to -1.', 0, NewSpVoice.Priority);
+  SpVoice.Priority := 3;
+  AssertEquals('The SpVoice Priority should be two after being set to 3.', 2, SpVoice.Priority);
+  SpVoice.Priority := -1;
+  AssertEquals('The SpVoice Priority should be zero after being set to -1.', 0, SpVoice.Priority);
 end;
 
 procedure TSAPITest.TestSAPIPriorityExceptions;
@@ -277,20 +247,16 @@ begin
 end;
 
 procedure TSAPITest.TestSAPIRate;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-
-  AssertEquals('The SpVoice raRatete should be zero by default.', 0, NewSpVoice.Rate);
-  NewSpVoice.Rate := 10;
-  AssertEquals('The SpVoice Rate should be ten after being set to 10.', 10, NewSpVoice.Rate);
+  AssertEquals('The SpVoice raRatete should be zero by default.', 0, SpVoice.Rate);
+  SpVoice.Rate := 10;
+  AssertEquals('The SpVoice Rate should be ten after being set to 10.', 10, SpVoice.Rate);
 
   { With Exceptions disabled setting Rate out of bounds should not generate an Exception. }
-  NewSpVoice.Rate := 11;
-  AssertEquals('The SpVoice Rate should be ten after being set to 11.', 10, NewSpVoice.Rate);
-  NewSpVoice.Rate := -11;
-  AssertEquals('The SpVoice Rate should be negative ten after being set to -11.', -10, NewSpVoice.Rate);
+  SpVoice.Rate := 11;
+  AssertEquals('The SpVoice Rate should be ten after being set to 11.', 10, SpVoice.Rate);
+  SpVoice.Rate := -11;
+  AssertEquals('The SpVoice Rate should be negative ten after being set to -11.', -10, SpVoice.Rate);
 end;
 
 procedure TSAPITest.TestSAPIRateExceptions;
@@ -312,34 +278,29 @@ end;
 
 procedure TSAPITest.TestSAPIStatus;
 var
-  NewSpVoice : TSpVoice;
   Status     : Variant;
 begin
-  NewSpVoice := TSpVoice.Create;
-  Status := NewSpVoice.Status;
+  Status := SpVoice.Status;
   { Check the status before speaking text. }
   AssertEquals('The SpVoice Status RunningState should be one before speaking.', 1, Status.RunningState);
   AssertEquals('The SpVoice Status CurrentStreamNumber should be zero before speaking.', 0, Status.CurrentStreamNumber);
   AssertEquals('The SpVoice Status LastStreamNumberQueued should be zero before speaking.', 0, Status.LastStreamNumberQueued);
 
   { Set the volume to 0 and speak some text to change the status. }
-  NewSpVoice.Volume := 0;
-  NewSpVoice.Speak('Test Text.');
+  SpVoice.Volume := 0;
+  SpVoice.Speak('Test Text.');
 
   { The Status.CurrentStreamNumber should be different now. }
-  Status := NewSpVoice.Status;
+  Status := SpVoice.Status;
   AssertEquals('The SpVoice Status CurrentStreamNumber should be one after speaking.', 1, Status.CurrentStreamNumber);
   AssertEquals('The SpVoice Status LastStreamNumberQueued should be one after speaking.', 1, Status.LastStreamNumberQueued);
 end;
 
 procedure TSAPITest.TestSAPISynchronousSpeakTimeout;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  AssertEquals('The SpVoice SynchronousSpeakTimeout should be 10000 by default.', 10000, NewSpVoice.SynchronousSpeakTimeout);
-  NewSpVoice.SynchronousSpeakTimeout := 0;
-  AssertEquals('The SpVoice SynchronousSpeakTimeout should be zero after being set to 0.', 0, NewSpVoice.SynchronousSpeakTimeout);
+  AssertEquals('The SpVoice SynchronousSpeakTimeout should be 10000 by default.', 10000, SpVoice.SynchronousSpeakTimeout);
+  SpVoice.SynchronousSpeakTimeout := 0;
+  AssertEquals('The SpVoice SynchronousSpeakTimeout should be zero after being set to 0.', 0, SpVoice.SynchronousSpeakTimeout);
 end;
 
 procedure TSAPITest.TestSAPIVoice;
@@ -352,19 +313,16 @@ begin
 end;
 
 procedure TSAPITest.TestSAPIVolume;
-var
-  NewSpVoice : TSpVoice;
 begin
-  NewSpVoice := TSpVoice.Create;
-  AssertEquals('The SpVoice Volume should be one hundred by default.', 100, NewSpVoice.Volume);
-  NewSpVoice.Volume := 1;
-  AssertEquals('The SpVoice Volume should be one after being set to 1.', 1, NewSpVoice.Volume);
+  AssertEquals('The SpVoice Volume should be one hundred by default.', 100, SpVoice.Volume);
+  SpVoice.Volume := 1;
+  AssertEquals('The SpVoice Volume should be one after being set to 1.', 1, SpVoice.Volume);
 
   { With Exceptions disabled setting Volume out of bounds should not generate an Exception. }
-  NewSpVoice.Volume := 101;
-  AssertEquals('The SpVoice Volume should be onehundred after being set to 101.', 100, NewSpVoice.Volume);
-  NewSpVoice.Volume := -1;
-  AssertEquals('The SpVoice Volume should be zero after being set to -1.', 0, NewSpVoice.Volume);
+  SpVoice.Volume := 101;
+  AssertEquals('The SpVoice Volume should be onehundred after being set to 101.', 100, SpVoice.Volume);
+  SpVoice.Volume := -1;
+  AssertEquals('The SpVoice Volume should be zero after being set to -1.', 0, SpVoice.Volume);
 end;
 
 procedure TSAPITest.TestSAPIVolumeExceptions;
