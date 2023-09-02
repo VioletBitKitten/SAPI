@@ -2,7 +2,7 @@
 
 ## WARNING
 
-This software is in development. The software is not complete and there is no documentation yet. Use with caution!
+This software is in development. The software is not complete and there is little documentation. Use with caution!
 
 ## Introduction
 
@@ -26,12 +26,24 @@ To Manually build this project:
 Contents of this package:
 
 * sapi.pas - The SAPI library.
+* mmdeviceapi.pas - Interface to the MM Device API. This is only used to get the default Audio Output Device.
 * doc/sapi.mc - Documentation for the SAPI library.
 * tts.pas - TTS program that uses the SAPI library.
 * ttsdemo.pas - Demo for using the SAPI library.
 * LICENSE - MIT License.
 * build.bat, build.sh - Build scripts for Windows and Unix-like systems.
 * Makefile.fpc - FreePascal fpcmake file.
+
+## Using the SAPI library in your own project
+
+Copy the files `sapi.pas` and `mmdeviceapi.pas` to where your source files live. Use the unit `sapi` in your source file.
+
+If you do not want to include `mmdeviceapi.pas` then add `-dSAPI_NO_AUDIO_DEFAULT` to the compiler directives. For example add the following to `Makefile.fpc``:
+
+```text
+[compiler]
+options=-dSAPI_NO_AUDIO_DEFAULT
+```
 
 ## TODO
 
