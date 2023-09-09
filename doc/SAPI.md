@@ -208,7 +208,7 @@ SpVoice.SetAudioOutputID(OutputID)
 
 #### TSpVoice.SetAudioOutputName
 
-Set the Output to be used when speaking text by the Output name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. Internally calls [TSpVoice.GetAudioOutputs](#tspvoicegetaudiooutputs) and [TSpVoice.SetAudioOutputID](#tspvoicesetaudiooutputid). See also the message `SpVoice_invalid_audio_output_name`.
+Set the Output to be used when speaking text by the Output name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. If the StartsWith match is not found a partial Contains match will be attempted. Internally calls [TSpVoice.GetAudioOutputs](#tspvoicegetaudiooutputs) and [TSpVoice.SetAudioOutputID](#tspvoicesetaudiooutputid). See also the message `SpVoice_invalid_audio_output_name`.
 
 **Definition:**
 
@@ -240,7 +240,7 @@ SpVoice.SetVoiceID(VoiceID)
 
 #### TSpVoice.SetVoiceName
 
-Set the Voice to be used when speaking text by the Voice name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. Internally calls [TSpVoice.GetVoices](#tspvoicegetvoices) and [TSpVoice.SetVoiceID](#tspvoicesetvoiceid). See also the message `SpVoice_invalid_voice_name`.
+Set the Voice to be used when speaking text by the Voice name. Intended for user interface. If an exact name match is not found a partial StartsWith match will be attempted. If the StartsWith match is not found a partial Contains match will be attempted. Internally calls [TSpVoice.GetVoices](#tspvoicegetvoices) and [TSpVoice.SetVoiceID](#tspvoicesetvoiceid). See also the message `SpVoice_invalid_voice_name`.
 
 **Definition:**
 
@@ -274,7 +274,7 @@ SpVoice.Speak('This is some text to be spoken.')
 
 #### TSpVoice.SpeakStream
 
-Basically play a WAV file.
+Basically play a WAV file. Uses [TSpFileStream](#tspfilestream) for the stream.
 
 **Definition:**
 
@@ -304,6 +304,7 @@ function TSpVoice.WaitUntilDone : Boolean;
 **Example:**
 
 ```pascal
+SpVoice.Speak(Text, SVSFlagsAsync);
 SpVoice.WaitUntilDone
 ```
 
@@ -313,7 +314,7 @@ SpVoice.WaitUntilDone
 
 #### TSpVoice.AudioOutput
 
-The output device speech is directed to. To set a voice use a returned value from the [GetAudioOutputs](#tspvoicegetaudiooutputs) method.
+The output device speech is directed to. To set an output device use a returned value from the [GetAudioOutputs](#tspvoicegetaudiooutputs) method.
 
 **Definition:**
 
@@ -369,7 +370,7 @@ Returns the status and event details of the SpVoice object.
 TSpVoice.Status : Variant // (Readonly)
 ```
 
-**NOTE:** The property is implemented, but there are no accommodations for using the returned status. Please see the documentation for use.
+**NOTE:** The property is implemented, but there are no accommodations for using the returned status. Please see the Microsoft documentation for use.
 
 [Microsoft SAPI Documentation for Status](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/ee125650(v=vs.85))
 
@@ -574,7 +575,7 @@ Returns the actual SpFileStream object. Intended for use with [TSpVoice.SpeakStr
 **Definition:**
 
 ```pascal
-TSpFileStreamStream : Variant // (REadonly)
+TSpFileStreamStream : Variant // (Readonly)
 ```
 
 ### SpFileStream Flags
