@@ -1,5 +1,14 @@
 # SAPI - Free Pascal interface to Microsoft SAPI
 
+[![FreePascal](https://img.shields.io/badge/FreePascal-3.2.2-blue?logo=lazarus)](https://www.freepascal.org/)
+[![Github: VioletBitKitten - SAPI](https://img.shields.io/github/license/VioletBitKitten/SAPI)](https://github.com/VioletBitKitten/SAPI/blob/main/LICENSE)
+[![Github: VioletBitKitten - SAPI](https://img.shields.io/github/last-commit/VioletBitKitten/SAPI/main)](https://github.com/VioletBitKitten/SAPI/commits/main)
+[![Github: VioletBitKitten - SAPI](https://img.shields.io/github/issues/VioletBitKitten/SAPI)](https://github.com/VioletBitKitten/SAPI/issues)
+[![Github: VioletBitKitten - SAPI](https://img.shields.io/github/stars/VioletBitKitten/SAPI)](https://github.com/VioletBitKitten/SAPI)
+[![Discord](https://img.shields.io/discord/1144984263347929098?label=Discord)](https://discord.gg/4ZQuQFEYht)
+
+[![Twitter: VioletBitKitten](https://img.shields.io/twitter/follow/violetbitkitten?style=social)](https://twitter.com/violetbitkitten)
+
 ## WARNING
 
 This software is in development. The software is not complete and there is little documentation. Use with caution!
