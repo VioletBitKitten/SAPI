@@ -2,6 +2,9 @@
 name=SAPI
 version=0.00
 
+[compiler]
+targetdir=..
+
 [target]
 units=sapi testsapi mmdeviceapi
 programs=ttsdemo tts runtests

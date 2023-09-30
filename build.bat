@@ -3,6 +3,10 @@ REM Batch file for building SAPI on Windows.
 REM See the following for help in BAT scripts.
 REM https://en.wikibooks.org/wiki/Windows_Batch_Scripting
 
+REM Variables for the build.
+SET SOURCEDIR="source\"
+SET APPNAME="SAPI"
+
 REM Check for a command line argument.
 REM If none just run the build.
 IF -%1-==-- GOTO runbuild
@@ -23,48 +27,53 @@ REM Figure out what we were given on the command line.
 
 REM Clean and Build.
 :runall
-    CALL :runclean
+    IF EXIST "%SOURCEDIR%Makefile" (
+        CALL :runclean
+    )
     CALL :runbuild
     EXIT /b
 
 REM Run the actual build.
 :runbuild
-    ECHO Building SAPI...
+    ECHO Building %APPNAME%...
+    CD %SOURCEDIR%
     IF NOT EXIST "Makefile" (
         fpcmake
     )
     make
+    cd ..
     EXIT /b
 
 REM Cleanup build artifacts, including the Makefile.
 :runclean
-    IF EXIST "Makefile" (
-        ECHO Cleaning SAPI...
-        make distclean
-        DEL Makefile
-    ) else (
-        ECHO Nothing to clean.
-    )
+    ECHO Cleaning %APPNAME%...
+    CD %SOURCEDIR%
+    fpcmake
+    make distclean
+    DEL Makefile
+    cd ..
     EXIT /b
 
 REM Show some help text.
 :showhelp
-    ECHO SAPI Windows Build Script
-    ECHO Performs build tasks for the SAPI library and files.
+    ECHO %APPNAME% Windows Build Script
+    ECHO Performs build tasks for %APPNAME%.
     ECHO.
     ECHO Commands:
-    ECHO build - Builds the SAPI project. (Default)
+    ECHO all   - Build everything from scratch. (Clean then Build)
+    ECHO build - Builds the %APPNAME% project. (Default)
     ECHO clean - Runs the make command 'distclean'.
     ECHO help  - Display this help text.
-    ECHO test  - Runs the SAPI tests.
+    ECHO test  - Runs the %APPNAME% tests.
     GOTO exitscript
 
 REM Run the tests.
 :runtests
-    IF NOT EXIST "rununit.exe" (
-        CALL :runbuild
+    IF EXIST "%SOURCEDIR%Makefile" (
+        CALL :runclean
     )
-    ECHO Running SAPI Unit tests...
+    CALL :runbuild
+    ECHO Running %APPNAME% Unit tests...
     runtests
     EXIT /b
 
